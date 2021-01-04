@@ -1,0 +1,52 @@
+﻿<Window x:Class="PI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PI"
+        xmlns:core="clr-namespace:PI.Core"
+        mc:Ignorable="d"
+        SizeToContent="WidthAndHeight"
+        Title="PI" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+
+        <Style TargetType="TextBlock" x:Key="Comment">
+            <Setter Property="FontSize"  Value="11"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontWeight"  Value="Medium"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Foreground" Value="#666"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+
+        <Style TargetType="Border">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="BorderBrush" Value="#555"/>
+        </Style>
+
+    </Window.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <core:Scene x:Name="MainScene" Width="800" Height="400"/>
+        <StackPanel HorizontalAlignment="Left" Margin="10">
+            <TextBlock Text="{Binding Digits, ElementName=MainScene, StringFormat=Digits: {0}}" Style="{StaticResource Comment}"/>
+            <TextBlock Text="{Binding Times, ElementName=MainScene, StringFormat=Times: {0:N0}}" Style="{StaticResource Comment}"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Right" Margin="10">
+            <TextBlock Text="Calculating Digits of Pi with Collisions" Style="{StaticResource Comment}"/>
+            <TextBlock Text="Based on DANIEL SHIFFMAN PI calculation challenge" Style="{StaticResource Comment}"/>
+            <TextBlock Text="Code in C# WPF 5.0 by Mehran Sivari" Style="{StaticResource Comment}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left">
+            <Button Content="Run" Command="{Binding StartCommand, ElementName=MainScene}"
+                    HorizontalAlignment="Left" Width="150" Margin="0,10,5,0"/>
+            <Button Content="Reset" Command="{Binding ResetCommand, ElementName=MainScene}"
+                    HorizontalAlignment="Left" Width="150" Margin="0,10,0,0"/>
+        </StackPanel>
+        <TextBlock Text="{Binding CalculationResult, ElementName=MainScene}" HorizontalAlignment="Right" FontSize="14" VerticalAlignment="Center" Margin="0,10,0,0" Grid.Row="1"/>
+    </Grid>
+</Window>
